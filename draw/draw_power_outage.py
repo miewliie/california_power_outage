@@ -30,7 +30,7 @@ def draw_fire_points(image_path, output_path, p_outage_data):
     im_width = image.size[0]
     im_height = image.size[1]
 
-    icon_image = Image.open("./assets/power.png").convert('RGBA')
+    icon_image = Image.open("./assets/pin.png").convert('RGBA')
     icon_image = icon_image.resize((50, 50))
 
     for item in p_outage_data:
