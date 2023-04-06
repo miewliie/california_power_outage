@@ -37,10 +37,13 @@ def draw_fire_points(image_path, output_path, p_outage_data):
 
         second = item['attributes']['StartDate'] / 1000
         date_time = datetime.fromtimestamp(second).replace(microsecond=0)
-        today = datetime.now().hour
+        h_today = datetime.now().hour
+        today = datetime.now().date()
 
-        if date_time.hour == today:
+        if date_time.date() == today and date_time.hour == h_today:
+
             x, y = item['geometry']['x'], item['geometry']['y']
+
             lon_x_pixel = convert_lon_to_x_pixel(im_width, x)
             lat_y_pixel = convert_lat_to_y_pixel(im_height, y)
 
