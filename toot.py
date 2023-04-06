@@ -55,7 +55,7 @@ if __name__ == '__main__':
     if power_outages is not None:
         features = power_outages['features']
         draw_fire.draw_fire_points(image_path, output_path, features)
-        # send_new_status_for(title, output_path)
+        send_new_status_for(title, output_path)
     else:
         print(" No power outage found")
 
