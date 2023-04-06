@@ -14,7 +14,7 @@ jobs:
 
       - name: Install dependencies 
         run: |-
-          cd /home/runner/work/california_fire/california_fire
+          cd /home/runner/work/california_power_outage/california_power_outage
           pip3 install Mastodon.py
           python3 -m pip install --upgrade Pillow
 
