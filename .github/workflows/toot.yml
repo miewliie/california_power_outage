@@ -3,7 +3,7 @@ name: Power outage Toot workflow
 on:
   workflow_dispatch:
   schedule:
-     - cron: "1 1 * * *"
+     - cron: "59 * * * *"
 
 jobs:
   toot:
