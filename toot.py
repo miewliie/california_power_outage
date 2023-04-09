@@ -1,5 +1,6 @@
 import os
 from mastodon import Mastodon
+from datetime import datetime
 import draw.draw_power_outage as draw_fire
 from api.arcgis_api import get_power_outage
 
@@ -52,8 +53,19 @@ if __name__ == '__main__':
     power_outages = get_power_outage()
     title = get_power_outage_title()
 
-    if power_outages is not None:
-        features = power_outages['features']
+    features = power_outages['features']
+    has_outage = False
+    for item in features:
+        second = item['attributes']['StartDate'] / 1000
+        date_time = datetime.fromtimestamp(second).replace(microsecond=0)
+        h_today = datetime.now().hour
+        today = datetime.now().date()
+
+        if date_time.date() == today and date_time.hour == h_today:
+            has_outage = True
+            break
+
+    if has_outage:
         draw_fire.draw_fire_points(image_path, output_path, features)
         send_new_status_for(title, output_path)
     else:
