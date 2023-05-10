@@ -3,6 +3,8 @@ import math
 from PIL import Image, ImageDraw, ImageFont
 from datetime import datetime
 
+from california_power_outage.core.power_outage import PowerOutage
+
 TOP = 43.009518
 BOTTOM = 31.534156
 LEFT = -130.409591
@@ -25,7 +27,7 @@ def convert_lat_to_y_pixel(image_height: float, latitude: float):
     return yp
 
 
-def draw_power_outage_points(image_path, output_path, p_outage_data):
+def draw_power_outage_points(image_path: str, output_path: str, p_outage_data: list[PowerOutage]):
     image = Image.open(image_path).convert('RGBA')
     im_width = image.size[0]
     im_height = image.size[1]
@@ -35,14 +37,14 @@ def draw_power_outage_points(image_path, output_path, p_outage_data):
 
     for item in p_outage_data:
 
-        second = item['attributes']['StartDate'] / 1000
+        second = item.time / 1000
         date_time = datetime.fromtimestamp(second).replace(microsecond=0)
         h_today = datetime.now().hour
         today = datetime.now().date()
 
         if date_time.date() == today and date_time.hour == h_today:
 
-            x, y = item['geometry']['x'], item['geometry']['y']
+            x, y = item.longitude, item.latitude
 
             lon_x_pixel = convert_lon_to_x_pixel(im_width, x)
             lat_y_pixel = convert_lat_to_y_pixel(im_height, y)
