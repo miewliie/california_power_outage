@@ -2,6 +2,7 @@ import unittest
 from unittest import mock
 from unittest.mock import MagicMock
 
+from california_power_outage.core.power_outage import PowerOutage
 from california_power_outage.draw.draw_power_outage import convert_lon_to_x_pixel, \
     convert_lat_to_y_pixel, ImageDraw, Image, draw_power_outage_points, datetime
 
@@ -25,14 +26,19 @@ class TestDrawPowerOutage(unittest.TestCase):
 
     def test_draw_power_outage(self):
         output_path = "./outputs/california_output_map.png"
-        outage_data = [{'attributes': {'StartDate': int(datetime.now().timestamp() * 1000)},
-                        'geometry': {'x': -118.0585835, 'y': 34.011356}}]
+        outage_data: list[PowerOutage] = [PowerOutage(time=int(datetime.now().timestamp() * 1000),
+                                                      outage_type="Not Planned",
+                                                      latitude=37.15032999999999,
+                                                      longitude=-120.10193000000001),
+                                          PowerOutage(time=1683707400000,
+                                                      outage_type="Planned",
+                                                      latitude=33.384629742399994,
+                                                      longitude=-117.23682746969999)]
         mocked_image = 'mocked_image'
         with mock.patch('california_power_outage.draw.draw_power_outage.Image.open') as mock_open, \
                 mock.patch.object(Image.Image, 'convert', return_value=mocked_image) as mock_convert, \
                 mock.patch('california_power_outage.draw.draw_power_outage.convert_lon_to_x_pixel') as mock_lon, \
                 mock.patch('california_power_outage.draw.draw_power_outage.convert_lat_to_y_pixel') as mock_lat:
-
             mock_open.resize.return_value = mock.MagicMock(spec=Image, size=(50, 50), mode='RGBA')
             mock_convert.return_value = mock.MagicMock(spec=Image, size=(1600, 1200), mode='RGBA')
 
