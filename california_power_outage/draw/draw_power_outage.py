@@ -25,7 +25,7 @@ def convert_lat_to_y_pixel(image_height: float, latitude: float):
     return yp
 
 
-def draw_fire_points(image_path, output_path, p_outage_data):
+def draw_power_outage_points(image_path, output_path, p_outage_data):
     image = Image.open(image_path).convert('RGBA')
     im_width = image.size[0]
     im_height = image.size[1]
@@ -50,3 +50,4 @@ def draw_fire_points(image_path, output_path, p_outage_data):
             image.alpha_composite(icon_image, dest=(int(lon_x_pixel), int(lat_y_pixel) - 25))
 
     image.save(output_path)
+    return output_path
