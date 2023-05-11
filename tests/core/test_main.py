@@ -1,6 +1,5 @@
 import unittest
 from unittest import mock
-
 from california_power_outage.core.power_outage import PowerOutage
 from main import main
 
@@ -18,17 +17,15 @@ class TestMain(unittest.TestCase):
                                                                  latitude=33.384629742399994,
                                                                  longitude=-117.23682746969999)]
 
-        with mock.patch('main.network_manager.get_power_outage_data',
+        with mock.patch('main.get_power_outage_data',
                         return_value=expected_power_outages) as mock_get_power_outage_data, \
                 mock.patch('main.in_date_time_boundary', return_value=expected_power_outages) as mock_time_boundary, \
-                mock.patch('main.draw_power_outage_points', return_value=output_path) as mock_draw, \
-                mock.patch('main.social.social_manager') as mock_social_manager:
+                mock.patch('main.social_manager') as mock_social_manager:
 
             main()
             mock_get_power_outage_data.assert_called_once()
             mock_time_boundary.assert_called_once()
-            mock_draw.assert_called_once()
-            mock_social_manager.assert_called_once_with(output_path, expected_power_outages)
+            mock_social_manager.assert_called_once_with(output_path=output_path, power_outages=expected_power_outages)
 
 
 if __name__ == '__main__':
