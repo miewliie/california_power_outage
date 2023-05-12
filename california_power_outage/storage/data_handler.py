@@ -1,6 +1,5 @@
 import json
 import os
-from typing import Any
 
 from california_power_outage.core.power_outage import PowerOutage
 
@@ -14,7 +13,7 @@ def read_json(file_path: str):
         return json.loads(output_file.read()) if size > 0 else None
 
 
-def from_dict_to_power_outage(dict_data: dict[str, Any]) -> PowerOutage:
+def from_dict_to_power_outage(dict_data: dict) -> PowerOutage:
     """ Convert dictionary into PowerOutage object."""
     return PowerOutage(time=dict_data['attributes']['StartDate'],
                        outage_type=dict_data['attributes']['OutageType'],
@@ -23,10 +22,12 @@ def from_dict_to_power_outage(dict_data: dict[str, Any]) -> PowerOutage:
                        )
 
 
-def power_outage_encoder(power_outages: dict[str, Any]) -> list[PowerOutage]:
+def power_outage_encoder(power_outages: dict[str, str]) -> list[PowerOutage]:
     """ Convert dictionary into list PowerOutage objects."""
-    power_outages_list: list[dict[str, Any]] = power_outages['features']
-    power_outages: list[PowerOutage] = []
-    for obj in power_outages_list:
-        power_outages.append(from_dict_to_power_outage(dict_data=obj))
-    return power_outages
+    po_features: str = power_outages['features']
+    power_outages_list: list[PowerOutage] = []
+
+    po_item: dict
+    for po_item in po_features:
+        power_outages_list.append(from_dict_to_power_outage(dict_data=po_item))
+    return power_outages_list
