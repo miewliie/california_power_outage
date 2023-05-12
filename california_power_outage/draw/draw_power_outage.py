@@ -27,8 +27,8 @@ def convert_lat_to_y_pixel(image_height: float, latitude: float):
     return yp
 
 
-def draw_power_outage_points(image_path: str, output_path: str, p_outage_data: list[PowerOutage]):
-    image = Image.open(image_path).convert('RGBA')
+def draw_power_outage_points(base_image_path: str, output_path: str, p_outage_data: list[PowerOutage]):
+    image = Image.open(base_image_path).convert('RGBA')
     im_width = image.size[0]
     im_height = image.size[1]
 
@@ -36,20 +36,12 @@ def draw_power_outage_points(image_path: str, output_path: str, p_outage_data: l
     icon_image = icon_image.resize((50, 50))
 
     for item in p_outage_data:
+        x, y = item.longitude, item.latitude
 
-        second = item.time / 1000
-        date_time = datetime.fromtimestamp(second).replace(microsecond=0)
-        h_today = datetime.now().hour
-        today = datetime.now().date()
+        lon_x_pixel = convert_lon_to_x_pixel(im_width, x)
+        lat_y_pixel = convert_lat_to_y_pixel(im_height, y)
 
-        if date_time.date() == today and date_time.hour == h_today:
-
-            x, y = item.longitude, item.latitude
-
-            lon_x_pixel = convert_lon_to_x_pixel(im_width, x)
-            lat_y_pixel = convert_lat_to_y_pixel(im_height, y)
-
-            image.alpha_composite(icon_image, dest=(int(lon_x_pixel), int(lat_y_pixel) - 25))
+        image.alpha_composite(icon_image, dest=(int(lon_x_pixel), int(lat_y_pixel) - 25))
 
     image.save(output_path)
     return output_path
