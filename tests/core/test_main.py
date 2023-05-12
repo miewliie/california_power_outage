@@ -8,8 +8,8 @@ from main import main
 class TestMain(unittest.TestCase):
 
     def test_main_function(self):
-        output_path = "./outputs/california_output_map.png"
-        base_image_path = "../../assets/california_base_map.png"
+        output_path = "outputs/california_output_map.png"
+        base_image_path = "assets/california_base_map.png"
         expected_power_outages: list[PowerOutage] = [PowerOutage(time=int(datetime.now().timestamp() * 1000),
                                                                  outage_type="Not Planned",
                                                                  latitude=37.15032999999999,
