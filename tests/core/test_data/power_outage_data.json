@@ -1,0 +1,214 @@
+{
+  "objectIdFieldName": "OBJECTID",
+  "uniqueIdField": {
+    "name": "OBJECTID",
+    "isSystemMaintained": true
+  },
+  "globalIdFieldName": "GlobalID",
+  "geometryType": "esriGeometryPoint",
+  "spatialReference": {
+    "wkid": 4326,
+    "latestWkid": 4326
+  },
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "UtilityCompany",
+      "type": "esriFieldTypeString",
+      "alias": "UtilityCompany",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null,
+      "description": "{\"value\":\"Name of the Utility Company\",\"fieldValueType\":\"typeOrCategory\"}"
+    },
+    {
+      "name": "StartDate",
+      "type": "esriFieldTypeDate",
+      "alias": "Start Date/Time",
+      "sqlType": "sqlTypeOther",
+      "length": 8,
+      "domain": null,
+      "defaultValue": null,
+      "description": "{\"value\":\"When the outage was first reported by the system\",\"fieldValueType\":\"dateAndTime\"}"
+    },
+    {
+      "name": "EstimatedRestoreDate",
+      "type": "esriFieldTypeDate",
+      "alias": "Estimated Restoration Date/Time",
+      "sqlType": "sqlTypeOther",
+      "length": 8,
+      "domain": null,
+      "defaultValue": null,
+      "description": "{\"value\":\"Estimated time of restoration. (If Available)\",\"fieldValueType\":\"dateAndTime\"}"
+    },
+    {
+      "name": "Cause",
+      "type": "esriFieldTypeString",
+      "alias": "Cause",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null,
+      "description": "{\"value\":\"Outage cause defined by the utilities. For PSPS outages (PG&E: filter outages containing \\\"publicsafety\\\", SCE: No identified status yet, SDG&E: filter outages containing \\\"unsafeconditions\\\")\",\"fieldValueType\":\"description\"}"
+    },
+    {
+      "name": "ImpactedCustomers",
+      "type": "esriFieldTypeInteger",
+      "alias": "Impacted Customers",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null,
+      "description": "{\"value\":\"Number of customers impacted. This is power meters and not people. 2.5 people for meter is a general planning conversion.\",\"fieldValueType\":\"countOrAmount\"}"
+    },
+    {
+      "name": "County",
+      "type": "esriFieldTypeString",
+      "alias": "County",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null,
+      "description": "{\"value\":\"County only populated if utility designates this in their feed. NOTE: Outages cross county boundaries and only one county is captures per outage.\",\"fieldValueType\":\"locationOrPlaceName\"}"
+    },
+    {
+      "name": "OutageStatus",
+      "type": "esriFieldTypeString",
+      "alias": "Outage Status",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": {
+        "type": "codedValue",
+        "name": "OutageStatus_Domain",
+        "codedValues": [
+          {
+            "name": "Active",
+            "code": "Active"
+          },
+          {
+            "name": "Restored",
+            "code": "Restored"
+          }
+        ]
+      },
+      "defaultValue": "Active",
+      "description": "{\"value\":\"This is a legacy field. Currently only active outages are captured in this dataset.\",\"fieldValueType\":\"typeOrCategory\"}"
+    },
+    {
+      "name": "OutageType",
+      "type": "esriFieldTypeString",
+      "alias": "Outage Type",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": {
+        "type": "codedValue",
+        "name": "OutageType_Domain",
+        "codedValues": [
+          {
+            "name": "Planned",
+            "code": "Planned"
+          },
+          {
+            "name": "Not Planned",
+            "code": "Not Planned"
+          },
+          {
+            "name": "Unknown",
+            "code": "Unknown"
+          }
+        ]
+      },
+      "defaultValue": null,
+      "description": "{\"value\":\"This field is calculated from a planned or not planned designation by the utility or it is calculated by the CalOES script based on what the cause is.\",\"fieldValueType\":\"typeOrCategory\"}"
+    },
+    {
+      "name": "GlobalID",
+      "type": "esriFieldTypeGlobalID",
+      "alias": "GlobalID",
+      "sqlType": "sqlTypeOther",
+      "length": 38,
+      "domain": null,
+      "defaultValue": "NEWID() WITH VALUES"
+    },
+    {
+      "name": "OutageTypeColor",
+      "type": "esriFieldTypeString",
+      "alias": "OutageTypeColor",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null,
+      "description": "{\"value\":\"This designates a color per Outage Type use in Operations Dashboard\",\"fieldValueType\":\"typeOrCategory\"}"
+    },
+    {
+      "name": "OutageStatusColor",
+      "type": "esriFieldTypeString",
+      "alias": "OutageStatusColor",
+      "sqlType": "sqlTypeOther",
+      "length": 50,
+      "domain": null,
+      "defaultValue": null,
+      "description": "{\"value\":\"This is a legacy field. The current dataset only captures active outages.\",\"fieldValueType\":\"typeOrCategory\"}"
+    },
+    {
+      "name": "IncidentId",
+      "type": "esriFieldTypeString",
+      "alias": "Indicent ID",
+      "sqlType": "sqlTypeOther",
+      "length": 256,
+      "domain": null,
+      "defaultValue": null
+    }
+  ],
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 2206419,
+        "UtilityCompany": "PGE",
+        "StartDate": 1683200040000,
+        "EstimatedRestoreDate": 1683750840000,
+        "Cause": "REPLCE TXFMR",
+        "ImpactedCustomers": 2,
+        "County": "MADERA",
+        "OutageStatus": "Active",
+        "OutageType": "Not Planned",
+        "GlobalID": "6f9e9c04-cfcf-4179-9b8b-8bec133a6d3a",
+        "OutageTypeColor": "#ffaa00",
+        "OutageStatusColor": null,
+        "IncidentId": "2104333"
+      },
+      "geometry": {
+        "x": -120.10193000000001,
+        "y": 37.15032999999999
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 2211922,
+        "UtilityCompany": "SDGE",
+        "StartDate": 1683707400000,
+        "EstimatedRestoreDate": 1683730800000,
+        "Cause": "A power outage has been scheduled in your area to make required repairs to our electrical system. A letter containing detailed outage information was mailed to you.",
+        "ImpactedCustomers": 0,
+        "County": "SAN DIEGO",
+        "OutageStatus": "Active",
+        "OutageType": "Planned",
+        "GlobalID": "83d7e10a-c9c4-4e0d-a696-436bbb9a5e8c",
+        "OutageTypeColor": "#a8a800",
+        "OutageStatusColor": null,
+        "IncidentId": "1000685"
+      },
+      "geometry": {
+        "x": -117.23682746969999,
+        "y": 33.384629742399994
+      }
+    }
+  ]
+}
