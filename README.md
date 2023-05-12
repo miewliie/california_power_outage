@@ -18,3 +18,4 @@ python -m unittest discover
 ```
 
 ### Power Outage Flow
+![po_flow](https://github.com/miewliie/california_power_outage/assets/20311850/66184842-ff03-4eca-8686-e67eb272e8cc)
