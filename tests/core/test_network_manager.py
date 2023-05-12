@@ -9,7 +9,7 @@ from california_power_outage.storage.data_handler import read_json
 class TestNetworkManager(unittest.TestCase):
 
     def test_fetch_power_outage_data(self):
-        power_outages = read_json('test_data/power_outage_data.json')
+        power_outages = read_json('tests/core/test_data/power_outage_data.json')
         expected_power_outages: list[PowerOutage] = [PowerOutage(time=1683200040000,
                                                                  outage_type="Not Planned",
                                                                  latitude=37.15032999999999,
@@ -30,7 +30,7 @@ class TestNetworkManager(unittest.TestCase):
             self.assertEqual(result, expected_power_outages)
 
     def test_fetch_empty_power_outage_data(self):
-        power_outages = read_json('test_data/empty_power_outage_data.json')
+        power_outages = read_json('tests/core/test_data/empty_power_outage_data.json')
         expected_power_outages: list[PowerOutage] = []
 
         with mock.patch('california_power_outage.core.network_manager.fetch_power_outages',

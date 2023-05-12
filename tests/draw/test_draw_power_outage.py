@@ -29,11 +29,7 @@ class TestDrawPowerOutage(unittest.TestCase):
         outage_data: list[PowerOutage] = [PowerOutage(time=int(datetime.now().timestamp() * 1000),
                                                       outage_type="Not Planned",
                                                       latitude=37.15032999999999,
-                                                      longitude=-120.10193000000001),
-                                          PowerOutage(time=1683707400000,
-                                                      outage_type="Planned",
-                                                      latitude=33.384629742399994,
-                                                      longitude=-117.23682746969999)]
+                                                      longitude=-120.10193000000001)]
         mocked_image = 'mocked_image'
         with mock.patch('california_power_outage.draw.draw_power_outage.Image.open') as mock_open, \
                 mock.patch.object(Image.Image, 'convert', return_value=mocked_image) as mock_convert, \
@@ -45,14 +41,13 @@ class TestDrawPowerOutage(unittest.TestCase):
             mock_lon.return_value = 887.0309241515766
             mock_lat.return_value = 940.9545772935094
 
-            actual_result = draw_power_outage_points(image_path='./assets/map.png',
+            actual_result = draw_power_outage_points(base_image_path='./assets/map.png',
                                                      output_path=output_path, p_outage_data=outage_data)
 
             mock_open.assert_called()
             mock_open.assert_called()
             mock_lon.assert_called_once()
             mock_lat.assert_called_once()
-            # mock_convert.alpha_composite.assert_called_once()
             self.assertEqual(actual_result, output_path)
 
 

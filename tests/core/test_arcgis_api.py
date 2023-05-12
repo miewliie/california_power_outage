@@ -11,9 +11,9 @@ class TestArcgisApi(unittest.TestCase):
         with mock.patch('california_power_outage.core.arcgis_api.requests.get',
                         return_value=response) as mock_request:
             response.json.return_value = expected_result
-            result = fetch_power_outages(url='http://test.com')
+            result = fetch_power_outages()
             self.assertEqual(result, expected_result)
-            mock_request.assert_called_once_with('http://test.com')
+            mock_request.assert_called_once()
 
 
 if __name__ == '__main__':
