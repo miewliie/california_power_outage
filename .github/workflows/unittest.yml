@@ -1,0 +1,25 @@
+name: Unit Test workflow
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |-
+          cd /home/runner/work/california_power_outage/california_power_outage
+          python3 -m pip install --upgrade Pillow
+          pip3 install Mastodon.py
+
+      - name: Run tests
+        run: |-
+          cd /home/runner/work/california_power_outage/california_power_outage/
+          python3 -m unittest discover
