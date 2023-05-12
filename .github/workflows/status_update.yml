@@ -3,7 +3,7 @@ name: Power outage Toot workflow
 on:
   workflow_dispatch:
   schedule:
-     - cron: "59 * * * *"
+     - cron: "0 * * * *"
 
 jobs:
   toot:
@@ -18,10 +18,15 @@ jobs:
           pip3 install Mastodon.py
           python3 -m pip install --upgrade Pillow
 
+      - name: Run tests
+        run: |-
+          cd /home/runner/work/california_power_outage/california_power_outage/
+          python3 -m unittest discover
+
       - name: Post fire title and map into Mastodon
         run: |-
           cd /home/runner/work/california_power_outage/california_power_outage
-          python3 toot.py
+          python3 main.py
         env:
           MASTODON_EMAIL: ${{ secrets.MASTODON_EMAIL }}
           MASTODON_PASSWORD: ${{ secrets.MASTODON_PASSWORD }}
